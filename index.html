@@ -9,6 +9,8 @@ reaches a certain point, the user will be able to place a model in the scene
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>8th Wall Web: A-FRAME</title>
 
     <!-- load 8thwall version of a-frame as well as our JS components -->
@@ -35,28 +37,79 @@ reaches a certain point, the user will be able to place a model in the scene
     <script src="./aframe_components/checkmark-primitive.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
 
 <body>
-    <!--Div to display UI elements on top of the canvas. Generally UI elements are positioned in relation to the viewport
+    <!--Display UI elements on top of the canvas. Generally UI elements are positioned in relation to the viewport-->
     <div id="ui">
-        <button class="ui-button" onclick="alert('ui interaction successful!')">Testing</button>
-    </div>-->
+        <div id="ui-header" class="">
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+                <small>0%</small>
+            </div>
+            <div class="scene-complete-container">
+                <span><i class="fas fa-check-circle"></i> Scene Reconstruction Complete</span>
+            </div>
+            <div class="scene-placed-container">
+                    <span><i class="fas fa-check-circle"></i> Scene Model Placed</span>
+            </div>
+        </div>
+        <div id="ui-body" class="">
+            <div class="fit-to-frame helper-image">
+                <img class="fit" src="./images/fit-to-frame.svg" alt="fit-to-frame marker">
+            </div>
+            <div class="tap-to-place helper-image">
+                <img class="place" src="./images/tap-to-place.svg" alt="tap-to-place marker">
+                <div class="place-text">Tap to Place</div>
+            </div>
+        </div>
+        <div id="ui-footer" class="">
+            <button class="ui-button"><i class="fas fa-question"></i></button>
+        </div>
 
-    <a-scene id="mainScene" debug xrweb
-        check-spawner="modelID: #fullShop;
-        modelScale: 0.01 0.01 0.01;
+        <div id="ui-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Crime Scene Reconstruction</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Directions go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
+                        hereDirections go hereDirections go hereDirections go here</p>
+                    <hr>
+                    <p>Other directions go here</p>
+                </div>
+                <div class="modal-footer">
+                    <p>Footer text</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a-scene id="mainScene" debug xrweb check-spawner="modelID: #fullShop;
+        modelScale: 0.1 0.1 0.1;
         modelRotation: 0 0 0;
-        targetLimit: 3"
-        gesture-detector 
-        xrextras-generate-image-targets="primitive: checkmark-primitive"
+        targetLimit: 3" gesture-detector xrextras-generate-image-targets="primitive: checkmark-primitive"
         xrextras-almost-there xrextras-loading xrextras-runtime-error>
 
         <!--Load assets-->
         <a-assets>
             <a-asset-item id="checkmark" src="./export/checkmark.glb"></a-asset-item>
             <a-asset-item id="fullShop" src="./export/fullShop_powerof2/fullShop_powerof2.gltf"></a-asset-item>
+            <!-- <a-asset-item id="fullShop" src="./export/fullShopFancy/fullShop_fancy.gltf"></a-asset-item> -->
         </a-assets>
 
         <!--Camera-->
@@ -71,6 +124,8 @@ reaches a certain point, the user will be able to place a model in the scene
         </a-entity>
 
     </a-scene>
+
+    <script src="./js/index.js"></script>
 </body>
 
 </html>

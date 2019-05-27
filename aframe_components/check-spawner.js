@@ -80,6 +80,7 @@ AFRAME.registerComponent('check-spawner', {
 
         if (this.modelCount >= this.data.modelLimit) {
             ground.removeEventListener('click', this.spawnModel);
+            this.removePlace();
         }
     },
     increment: function () {
@@ -87,14 +88,60 @@ AFRAME.registerComponent('check-spawner', {
         this.targetCount++;
         console.log(this.targetCount);
 
+        //calculate progress for cosmetic progress bar
+        let progress = this.targetCount/this.data.targetLimit;
+        progress = progress.toFixed(2) * 100;
+        console.log(progress);
+
+        //update the progress bar
+        const progressEl = document.querySelector('.progress-container').children;
+        progressEl[0].style.width = `${progress}%`;
+        progressEl[1].innerHTML = `${progress}%`;
+
         //check to see if the spawner should be enabled
         if(this.targetCount === this.data.targetLimit){
             const ground = document.querySelector('#ground');
             ground.addEventListener('click', this.spawnModel);
+
+            //remove the generate image targets component from the scene and hide the checkmarks
+            this.el.sceneEl.removeAttribute('xrextras-generate-image-targets');
+            const checkmarks = document.querySelectorAll('checkmark-primitive');
+            for(let i = 0; i < checkmarks.length; i++){
+                this.el.sceneEl.removeChild(checkmarks[i]);
+            }
+            console.log(checkmarks);
+
+            this.removeFit();
         }
     },
     decrement: function () {
         console.log("value has been decremented");
+    },
+    removeFit: function () {
+        //find the progress bar container and disable it
+        const progressContainer = document.querySelector('.progress-container');
+        progressContainer.style.display = "none";
+        //find the scene complete container and enable it
+        const completeContainer = document.querySelector('.scene-complete-container');
+        completeContainer.style.display = "block";
+        //find the fit to frame container and disable it
+        const fitToFrame = document.querySelector('.fit-to-frame');
+        fitToFrame.style.display = "none";
+        //find the tap to place container and enable it
+        const tapToPlace = document.querySelector('.tap-to-place');
+        tapToPlace.style.display = "flex";
+    },
+    removePlace: function() {
+        //find the scene complete container and disable it
+        const sceneComplete = document.querySelector('.scene-complete-container');
+        sceneComplete.style.display = "none";
+        //find the tap to place container and disable it
+        const tapToPlace = document.querySelector('.tap-to-place');
+        tapToPlace.style.display = "none";
+        //find the scene placed container and enabled it
+        const scenePlaced = document.querySelector('.scene-placed-container');
+        scenePlaced.style.display = "block";
+
     },
     modelCount: 0,
     targetCount: 0

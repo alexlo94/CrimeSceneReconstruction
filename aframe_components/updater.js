@@ -22,7 +22,6 @@ AFRAME.registerComponent('updater', {
     imageFound: function(){
         //if scanned isn't true then make it
         if(!this.scanned){
-            console.log(this.el.sceneEl.components);
             this.el.sceneEl.components["check-spawner"].increment();
             this.scanned = true;
         }
