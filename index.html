@@ -54,7 +54,7 @@ reaches a certain point, the user will be able to place a model in the scene
                 <span><i class="fas fa-check-circle"></i> Scene Reconstruction Complete</span>
             </div>
             <div class="scene-placed-container">
-                    <span><i class="fas fa-check-circle"></i> Scene Model Placed</span>
+                <span><i class="fas fa-check-circle"></i> Scene Model Placed</span>
             </div>
         </div>
         <div id="ui-body" class="">
@@ -74,23 +74,26 @@ reaches a certain point, the user will be able to place a model in the scene
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close">&times;</span>
-                    <h2>Crime Scene Reconstruction</h2>
+                    <h2>DSF Scene Reconstruction Tool</h2>
                 </div>
                 <div class="modal-body">
-                    <p>Directions go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go hereDirections go hereDirections go
-                        hereDirections go hereDirections go hereDirections go here</p>
+                    <p>The purpose of this tool is to produce 3D model reconstructions of designated crime scenes based
+                        on photographic evidence collected by DSF field agents. Usage of the tool is split into three
+                        (3) phases.</p>
                     <hr>
-                    <p>Other directions go here</p>
+                    <h4>Image Scanning</h4>
+                    <p>Use the camera on your device to scan photographic evidence provided to you by a field agent. The
+                        progress bar on the top of your screen indicated how much more material is needed to produce
+                        accurate results.</p>
+                    <h4>Scene Placement</h4>
+                    <p>Once enough material has been scanned, the progress bar will be replaced with a "Scene
+                        Reconstruction Complete" message. You should now be able to point your device at any surface and
+                        tap to place the reconstruction on it.</p>
+                    <h4>Examination</h4>
+                    <p>With the model placed on a surface you can now proceed to examine it and extract relevant
+                        information. Feel free to move around the scene, or get closer for a more detailed view. You can
+                        also translate, rotate, and scale the model using tap & drag, two-finger spin, and two-finger
+                        rotation respectively. </p>
                 </div>
                 <div class="modal-footer">
                     <p>Footer text</p>
@@ -108,8 +111,8 @@ reaches a certain point, the user will be able to place a model in the scene
         <!--Load assets-->
         <a-assets>
             <a-asset-item id="checkmark" src="./export/checkmark.glb"></a-asset-item>
-            <a-asset-item id="fullShop" src="./export/fullShop_powerof2/fullShop_powerof2.gltf"></a-asset-item>
-            <!-- <a-asset-item id="fullShop" src="./export/fullShopFancy/fullShop_fancy.gltf"></a-asset-item> -->
+            <!-- <a-asset-item id="fullShop" src="./export/fullShop_powerof2/fullShop_powerof2.gltf"></a-asset-item> -->
+            <a-asset-item id="fullShop" src="./export/fullShop/fullShop_fancy.gltf"></a-asset-item>
         </a-assets>
 
         <!--Camera-->
