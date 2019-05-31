@@ -42,6 +42,7 @@ AFRAME.registerComponent('check-spawner', {
         //bind this to spawnModel so it functions properly
         const data = this;
         this.spawnModel = this.spawnModel.bind(data);
+        this.removeCheckMarks= this.removeCheckMarks.bind(data);
 
     },
     spawnModel: function (event) {
@@ -72,6 +73,13 @@ AFRAME.registerComponent('check-spawner', {
         model.setAttribute('two-finger-spin', '');
 
         //increment the model count and check to see if the spawner should be disabled
+        model.addEventListener('model-loading', () => {
+            console.log('model loading');
+        });
+        model.addEventListener('model-loaded', function(data) {
+            this.removeLoad();
+        }.bind(this));
+
         this.modelCount++;
         this.removeSpawner();
     },
@@ -100,22 +108,25 @@ AFRAME.registerComponent('check-spawner', {
 
         //check to see if the spawner should be enabled
         if(this.targetCount === this.data.targetLimit){
-            const ground = document.querySelector('#ground');
-            ground.addEventListener('click', this.spawnModel);
-
-            //remove the generate image targets component from the scene and hide the checkmarks
-            this.el.sceneEl.removeAttribute('xrextras-generate-image-targets');
-            const checkmarks = document.querySelectorAll('checkmark-primitive');
-            for(let i = 0; i < checkmarks.length; i++){
-                this.el.sceneEl.removeChild(checkmarks[i]);
-            }
-
             // this.removeFit();
             _.delay(this.removeFit, 2000);
+            _.delay(this.removeCheckMarks, 2000);
         }
     },
     decrement: function () {
         console.log("value has been decremented");
+    },
+    removeCheckMarks: function() {
+        console.log(this);
+        const ground = document.querySelector('#ground');
+        ground.addEventListener('click', this.spawnModel);
+
+        //remove the generate image targets component from the scene and hide the checkmarks
+        this.el.sceneEl.removeAttribute('xrextras-generate-image-targets');
+        const checkmarks = document.querySelectorAll('checkmark-primitive');
+        for(let i = 0; i < checkmarks.length; i++){
+            this.el.sceneEl.removeChild(checkmarks[i]);
+        }
     },
     removeFit: function () {
         //find the progress bar container and disable it
@@ -138,10 +149,23 @@ AFRAME.registerComponent('check-spawner', {
         //find the tap to place container and disable it
         const tapToPlace = document.querySelector('.tap-to-place');
         tapToPlace.style.display = "none";
-        //find the scene placed container and enabled it
+
+        //find the object loading container and enable it
+        const objectLoading = document.querySelector('.scene-loading-container');
+        objectLoading.style.display = "block";
+
+        //find the scene placed container and enable it
+        // const scenePlaced = document.querySelector('.scene-placed-container');
+        // scenePlaced.style.display = "block";
+    },
+    removeLoad: function() {
+        //find the scene loading container and disable it
+        const objectLoading = document.querySelector('.scene-loading-container');
+        objectLoading.style.display = "none";
+
+        //find the scene placed container and enable it
         const scenePlaced = document.querySelector('.scene-placed-container');
         scenePlaced.style.display = "block";
-
     },
     modelCount: 0,
     targetCount: 0
