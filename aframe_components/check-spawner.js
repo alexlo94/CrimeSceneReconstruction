@@ -109,9 +109,9 @@ AFRAME.registerComponent('check-spawner', {
             for(let i = 0; i < checkmarks.length; i++){
                 this.el.sceneEl.removeChild(checkmarks[i]);
             }
-            console.log(checkmarks);
 
-            this.removeFit();
+            // this.removeFit();
+            _.delay(this.removeFit, 2000);
         }
     },
     decrement: function () {

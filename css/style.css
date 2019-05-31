@@ -82,6 +82,10 @@ body {
 
     height: 100%;
     width: 0%;
+
+    /* css transition for the progress bar width */
+    -webkit-transition: width 2s;
+    transition: width 2s;
 }
 
 .progress-container>small {
